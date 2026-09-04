@@ -28,4 +28,17 @@ public class PersonalInfo extends AbstractEntity {
 
     @Column(name = "municipality_of_registration", nullable = false)
     private String municipalityOfRegistration;
+    @Setter(AccessLevel.PACKAGE)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "amka_file_id")
+    private Attachment amkaFile;
+
+    public void addAmkaFile(Attachment amkaFile) {
+        this.amkaFile = amkaFile;
+
+    }
+
+    public void removeAmkaFile(Attachment amkaFile) {
+        this.amkaFile = null;
+    }
 }
