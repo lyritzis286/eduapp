@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -40,6 +41,10 @@ public class Role {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
     private Set<User> users = new HashSet<>();
 
+    public Set<User> getAllUsers() {
+        return Set.copyOf(users);
+    }
+
     public Set<Capability> getAllCapabilities() {
         return Set.copyOf(capabilities);
     }
@@ -52,6 +57,20 @@ public class Role {
     public void removeCapability(Capability capability) {
         capabilities.remove(capability);
         capability.getRoles().remove(this);
+    }
+
+    public void addUser(User user) {
+        users.add(user);
+        user.setRole(this);
+    }
+
+    public void removeUser(User user) {
+        users.remove(user);
+        user.setRole(null);
+    }
+
+    public void addUsers(Collection<User> users) {
+        users.forEach(this::addUser);
     }
 
     @Override
