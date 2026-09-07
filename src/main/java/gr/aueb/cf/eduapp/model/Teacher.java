@@ -3,6 +3,7 @@ package gr.aueb.cf.eduapp.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -37,8 +38,19 @@ public class Teacher extends AbstractEntity {
     @JoinColumn(name = "personal_info_id")
     private PersonalInfo personalInfo;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", unique = true, nullable = false)
+    @Setter(AccessLevel.PACKAGE)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Teacher teacher)) return false;
+        return Objects.equals(getVat(), teacher.getVat());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getVat());
+    }
 }
