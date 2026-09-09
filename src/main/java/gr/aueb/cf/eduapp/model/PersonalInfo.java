@@ -38,7 +38,7 @@ public class PersonalInfo extends AbstractEntity {
 
     }
 
-    public void removeAmkaFile(Attachment amkaFile) {
+    public void removeAmkaFile() {
         this.amkaFile = null;
     }
 }
