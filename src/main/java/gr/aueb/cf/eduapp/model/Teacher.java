@@ -24,10 +24,10 @@ public class Teacher extends AbstractEntity {
     private String vat;
 
     @Column (nullable = false)
-    private String firstName;
+    private String firstname;
 
     @Column (nullable = false)
-    private String lastName;
+    private String lastname;
 
     @Setter(AccessLevel.PACKAGE)
     @ManyToOne(fetch = FetchType.LAZY)
