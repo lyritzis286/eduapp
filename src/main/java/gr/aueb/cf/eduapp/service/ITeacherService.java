@@ -2,6 +2,7 @@ package gr.aueb.cf.eduapp.service;
 
 import gr.aueb.cf.eduapp.core.exceptions.EntityAlreadyExistsException;
 import gr.aueb.cf.eduapp.core.exceptions.EntityInvalidArgumentException;
+import gr.aueb.cf.eduapp.core.exceptions.EntityNotFoundException;
 import gr.aueb.cf.eduapp.core.exceptions.FileUploadException;
 import gr.aueb.cf.eduapp.dto.TeacherInsertDTO;
 import gr.aueb.cf.eduapp.dto.TeacherReadOnlyDTO;
@@ -17,5 +18,5 @@ public interface ITeacherService {
         throws EntityAlreadyExistsException, EntityInvalidArgumentException;
 
     void saveAmkaFile(UUID uuid, MultipartFile file)
-            throws FileUploadException, EntityAlreadyExistsException;
+            throws FileUploadException, EntityNotFoundException;
 }
