@@ -11,8 +11,8 @@ public class Mapper {
 
     public Teacher mapToTeacherEntity(TeacherInsertDTO dto) {
         Teacher teacher = new Teacher();
-        teacher.setFirstName(dto.firstname());
-        teacher.setLastName(dto.lastname());
+        teacher.setFirstname(dto.firstname());
+        teacher.setLastname(dto.lastname());
         teacher.setVat(dto.vat());
 
         UserInsertDTO userInsertDTO = dto.userInsertDTO();
@@ -37,8 +37,8 @@ public class Mapper {
 
     public TeacherReadOnlyDTO mapToTeacherReadOnlyDTO(Teacher teacher) {
         return new TeacherReadOnlyDTO(
-                teacher.getUuid().toString() , teacher.getLastName(),
-                teacher.getFirstName(),
+                teacher.getUuid().toString() , teacher.getLastname(),
+                teacher.getFirstname(),
                 teacher.getVat(), teacher.getRegion().getName());
 
     }
