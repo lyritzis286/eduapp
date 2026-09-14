@@ -40,7 +40,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
 
 
-        log.warn("User not authenticated, with message={}", message);
+        log.warn("User not authenticated uri={}, errorCode={}, with message={}", request.getRequestURI(), errorCode, message);
 
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json; charset=UTF-8");
