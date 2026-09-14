@@ -243,7 +243,7 @@ public class TeacherService implements ITeacherService{
     }
 
     @Override
-    @PreAuthorize("hasAuthority('VIEW_TEACHER') or hasAuthority('VIEW_ONLY_TEACHER') and @securityService.isOwnTeacherProfile(#uuid, authentication))")
+    @PreAuthorize("hasAuthority('VIEW_TEACHER') or hasAuthority('VIEW_ONLY_TEACHER') and @securityService.isOwnTeacherProfile(#uuid, authentication)")
     @Transactional(readOnly = true)
     public TeacherReadOnlyDTO getTeacherByUuidDeletedFalse(UUID uuid) throws EntityNotFoundException {
         Teacher teacher = teacherRepository.findByUuidAndDeletedFalse(uuid)
