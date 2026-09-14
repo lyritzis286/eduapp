@@ -22,6 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.resilience.annotation.Retryable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -162,6 +163,7 @@ public class TeacherService implements ITeacherService{
     }
 
     @Override
+    @PreAuthorize("hasAuthority('EDIT_TEACHER')")
     @Transactional(rollbackFor= {EntityNotFoundException.class, EntityAlreadyExistsException.class, EntityInvalidArgumentException.class})
     public TeacherReadOnlyDTO updateTeacher(TeacherUpdateDTO dto) throws EntityNotFoundException, EntityAlreadyExistsException, EntityInvalidArgumentException {
         Teacher teacher = teacherRepository.findByUuid(dto.uuid()).orElseThrow(() -> new EntityNotFoundException("Teacher", "id=" + dto.uuid()));
@@ -213,6 +215,7 @@ public class TeacherService implements ITeacherService{
 
 
     @Override
+    @PreAuthorize("hasAuthority('DELETE_TEACHER')")
     @Transactional(rollbackFor= {EntityNotFoundException.class})
     public TeacherReadOnlyDTO deleteTeacherByUUID(UUID uuid) throws EntityNotFoundException {
         Teacher teacher = teacherRepository.findByUuidAndDeletedFalse(uuid)
@@ -230,6 +233,7 @@ public class TeacherService implements ITeacherService{
 
 
     @Override
+    @PreAuthorize("hasAuthority('VIEW_TEACHER')")
     @Transactional(readOnly = true)
     public TeacherReadOnlyDTO getTeacherByUUID(UUID uuid) throws EntityNotFoundException {
         Teacher teacher = teacherRepository.findByUuid(uuid)
@@ -239,6 +243,7 @@ public class TeacherService implements ITeacherService{
     }
 
     @Override
+    @PreAuthorize("hasAuthority('VIEW_TEACHER') or hasAuthority('VIEW_ONLY_TEACHER') and @securityService(#uuid, authentication)")
     @Transactional(readOnly = true)
     public TeacherReadOnlyDTO getTeacherByUuidDeletedFalse(UUID uuid) throws EntityNotFoundException {
         Teacher teacher = teacherRepository.findByUuidAndDeletedFalse(uuid)
@@ -248,6 +253,7 @@ public class TeacherService implements ITeacherService{
     }
 
     @Override
+    @PreAuthorize("hasAuthority('VIEW_TEACHERS')")
     @Transactional(readOnly = true)
     public Page<TeacherReadOnlyDTO> getPaginatedTeachers(Pageable pageable) {
         Page<Teacher>teacherPage = teacherRepository.findAll(pageable);
@@ -264,6 +270,7 @@ public class TeacherService implements ITeacherService{
     }
 
     @Override
+    @PreAuthorize("hasAuthority('VIEW_TEACHERS')")
     @Transactional(readOnly = true)
     public Page<TeacherReadOnlyDTO> getTeachersPaginatedFiltered(Pageable pageable, TeacherFilters filters) throws EntityNotFoundException {
         if (filters.getUuid()!=null) {
