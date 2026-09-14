@@ -81,7 +81,7 @@
 
     CREATE TABLE attachments (
         id BIGINT NOT NULL AUTO_INCREMENT,
-        filename VARCHAR(255) NULL,
+        file_name VARCHAR(255) NULL,
 
         saved_name VARCHAR(255) NOT NULL,
         file_path VARCHAR(1024) NOT NULL,
