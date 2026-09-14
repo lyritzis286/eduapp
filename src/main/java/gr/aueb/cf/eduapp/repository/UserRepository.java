@@ -14,10 +14,10 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     Optional<User>findByUuidAndDeletedFalse(UUID uuid);
 
 
-    @EntityGraph(attributePaths = {"role", "role_capabilities"})
+    @EntityGraph(attributePaths = {"role", "role.capabilities"})
     Optional<User>findByUsername(String username);
 
-    @EntityGraph(attributePaths = {"role", "role_capabilities"})
+    @EntityGraph(attributePaths = {"role", "role.capabilities"})
     Optional<User>findByUsernameAndDeletedFalse(String username);
 
 

@@ -145,14 +145,7 @@ public class TeacherRestController {
                     responseCode = "400", description = "Validation error",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorResponseDTO.class))
             ),
-            @ApiResponse(
-                    responseCode = "401", description = "Not Authenticated",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDTO.class))
-            ),
-            @ApiResponse(
-                    responseCode = "403", description = "Access Denied",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDTO.class))
-            )
+
     })
     @PutMapping("/{uuid}")
     public ResponseEntity<TeacherReadOnlyDTO> updateTeacher (
@@ -181,13 +174,7 @@ public class TeacherRestController {
                     responseCode = "404", description = "Teacher not found",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDTO.class))
             ),
-            @ApiResponse(
-                    responseCode = "401", description = "Unauthorized",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDTO.class))
-            ),
-            @ApiResponse(
-                    responseCode = "403", description = "Access Denied",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDTO.class)))
+
     })
     @DeleteMapping("/{uuid}")
     public ResponseEntity<TeacherReadOnlyDTO> deleteTeacherByUUID (@PathVariable UUID uuid) throws EntityNotFoundException {
@@ -206,14 +193,7 @@ public class TeacherRestController {
                     responseCode = "404", description = "Teacher not found",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDTO.class))
             ),
-            @ApiResponse(
-                    responseCode = "401", description = "Not Authenticated",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDTO.class))
-            ),
-            @ApiResponse(
-                    responseCode = "403", description = "Access Denied",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDTO.class))
-            )
+
     })
     @GetMapping("/{uuid}")
     public ResponseEntity<TeacherReadOnlyDTO> getTeacherByUUID(@PathVariable UUID uuid) throws EntityNotFoundException {
@@ -228,13 +208,7 @@ public class TeacherRestController {
                     responseCode = "200", description = "Teachers returned",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Page.class))
             ),
-            @ApiResponse(
-                    responseCode = "401", description = "Unauthorized",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDTO.class))
-            ),
-            @ApiResponse(
-                    responseCode = "403", description = "Access Denied",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDTO.class)))
+
     })
     @GetMapping
     public ResponseEntity<Page<TeacherReadOnlyDTO>> getFilteredAndPaginatedTeachers(
