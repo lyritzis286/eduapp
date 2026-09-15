@@ -110,7 +110,7 @@ public class TeacherRestController {
                     )
             )
     })
-    @PostMapping(value = "/uuid/amka-file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/{uuid}/amka-file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> uploadAmkaFile(
             @PathVariable UUID uuid,
             @RequestParam("amkaFile") MultipartFile file
